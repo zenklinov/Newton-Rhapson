@@ -1,60 +1,73 @@
 # Newton-Raphson Method: From Beginner to Advanced
 
 ## Introduction
-The **Newton-Raphson method** (also called **Newton's method**) is a powerful iterative numerical technique for finding roots of real-valued functions. It uses linear approximations via tangent lines to rapidly converge to solutions. This method is widely used in engineering, physics, and optimization problems.
+The **Newton-Raphson method** is a root-finding algorithm that uses linear approximation through tangent lines to quickly converge to solutions. Works best when the function is smooth and the initial guess is close to the true root.
 
 ---
 
-## Basic Concept
-### Formula
-The core formula for the Newton-Raphson iteration is:
-\[
+## Core Formula
+The iterative formula is:
+$$
 x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
-\]
-where:
-- \(x_n\) = current approximation
-- \(f(x_n)\) = function value at \(x_n\)
-- \(f'(x_n)\) = derivative of the function at \(x_n\).
+$$
 
-### Geometric Interpretation
-The method approximates the function with its tangent line at \(x_n\), then finds where this tangent crosses the x-axis to get \(x_{n+1}\).
+### Key Components:
+- $x_n$: Current approximation
+- $f(x_n)$: Function value at current point
+- $f'(x_n)$: Derivative at current point
 
 ---
 
-## Algorithm Steps
-1. **Initial Guess**: Choose \(x_0\) close to the root.
-2. **Iteration**:
-   \[
+## Geometric Interpretation
+![Newton-Raphson Visualization](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Newton_iteration.svg/320px-Newton_iteration.svg.png)
+
+1. Start at $(x_0, f(x_0))$
+2. Follow tangent line to x-axis
+3. New x-value becomes $x_1$
+4. Repeat until convergence
+
+---
+
+## Step-by-Step Process
+1. **Choose initial guess** $x_0$
+2. **Compute**:
+   - Function value: $f(x_n)$
+   - Derivative: $f'(x_n)$
+3. **Update**:
+   $$
    x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
-   \]
-3. **Termination**: Stop when \(|x_{n+1} - x_n| < \epsilon\) (tolerance).
-
-**Note**: If \(f'(x_n) = 0\), the method fails due to division by zero.
+   $$
+4. **Check convergence**: Stop when $|x_{n+1} - x_n| < \epsilon$
 
 ---
 
-## Solved Example
-**Problem**: Find the root of \(f(x) = x^3 - x - 1\).
+## Worked Example
+**Problem**: Find root of $f(x) = x^3 - 2x - 5$
 
-1. **Initial guess**: \(x_0 = 1.5\)
-2. **Iteration 1**:
-   - \(f(1.5) = 1.5^3 - 1.5 - 1 = 0.875\)
-   - \(f'(1.5) = 3(1.5)^2 - 1 = 5.75\)
-   - \(x_1 = 1.5 - 0.875/5.75 ≈ 1.3478\)
-3. **Repeat** until convergence (typically 3-5 iterations).
+1. **Initial guess**: $x_0 = 2$
+2. **First iteration**:
+   - $f(2) = 8 - 4 - 5 = -1$
+   - $f'(2) = 3(4) - 2 = 10$
+   - $x_1 = 2 - (-1)/10 = 2.1$
+3. **Second iteration**:
+   - $f(2.1) = 9.261 - 4.2 - 5 = 0.061$
+   - $f'(2.1) = 3(4.41) - 2 = 11.23$
+   - $x_2 = 2.1 - 0.061/11.23 ≈ 2.0946$
+4. **Converges to** ≈ 2.0946 after 3-4 iterations
 
 ---
 
-## Convergence Analysis
-- **Quadratic Convergence**: Error reduces quadratically if the initial guess is sufficiently close to the root.
-- **Convergence Condition**:
-  \[
-  |f(x) \cdot f''(x)| < |f'(x)|^2
-  \]
-- **Failure Cases**: 
-  - Multiple roots
-  - Discontinuous derivatives
-  - Poor initial guesses.
+## Convergence Criteria
+- **Quadratic convergence**: Error squares each iteration near root
+- **Requirements**:
+  - $f$ is twice continuously differentiable
+  - $f'(x) \neq 0$ near root
+  - Initial guess sufficiently close to root
+
+**Convergence condition**:
+$$
+\left| \frac{f(x) f''(x)}{[f'(x)]^2} \right| < 1
+$$
 
 ---
 
