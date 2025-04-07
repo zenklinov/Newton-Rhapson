@@ -104,4 +104,4 @@ def newton_raphson(f, df, x0, tol=1e-6, max_iter=100):
 f = lambda x: x**3 - x - 1
 df = lambda x: 3*x**2 - 1
 root = newton_raphson(f, df, x0=1.5)
-print(f"Root: {root:.6f}") ```
+print(f"Root: {root:.6f}")
